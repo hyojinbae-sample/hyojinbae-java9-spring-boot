@@ -26,13 +26,13 @@ java9のモジュール機能を利用し、モジュール化してみる。
 
 
 ## apiプロジェクト
-- [module-info.java](tree/use-module/api/src/main/java/module-info.java)作成
+- [module-info.java](use-module/api/src/main/java/module-info.java)作成
 
 ## implプロジェクト
-- [module-info.java](tree/use-module/impl/src/main/java/module-info.java)作成
+- [module-info.java](use-module/impl/src/main/java/module-info.java)作成
 
 ## applicationプロジェクト
-- [module-info.java](tree/use-module/application/src/main/java/module-info.java)作成
+- [module-info.java](use-module/application/src/main/java/module-info.java)作成
 
 ## まとめ
 - java9のモジュール機能を利用しない場合、今まで通りに作ればOK。
