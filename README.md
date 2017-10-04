@@ -198,9 +198,50 @@ https://github.com/spring-projects/spring-framework/wiki/Migrating-to-Spring-Fra
 
 module pathに通すことで、automatic moduleとして利用できる。
 
+
+## jlint
+詳細は[ここ](https://qiita.com/opengl-8080/items/1007c2b2543c2fe0d7d5#jlink)
+
+- まず、mavenの clean packageを実行
+  - しようとしたが、うまくjarが作れえず、手作業でそれぞれのjarを作成
+  - ```
+  
+cd api/target/classes
+mkdir jar
+jar -c -f jar/api.jar .
+cd ../../..
+
+cd impl/target/classes
+mkdir jar
+jar -c -f jar/impl.jar .
+cd ../../..
+
+cd application/target/classes
+mkdir jar
+jar -c -f jar/application.jar .
+cd ../../..
+```
+- terminalから下記のコマンドを実行
+
+```
+export JAVA_HOME=`/usr/libexec/java_home -v 9` 
+
+$JAVA_HOME/bin/jlink --module-path \
+./api/target/classes/jar:\
+./impl/target/classes/jar:\
+./application/target/classes/jar:\
+$HOME/.m2/repository/org/springframework/boot/spring-boot/1.5.7.RELEASE:\
+$HOME/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/1.5.7.RELEASE:\
+$HOME/.m2/repository/org/springframework/spring-web/4.3.11.RELEASE:\
+$JAVA_HOME/jmods --add-modules java9.spring.boot.application --output ./output
+```
+
+
 ## まとめ
 - java9のモジュール機能を利用しない場合、今まで通りに作ればOK。
 - java9のモジュールにする場合は、
   - ソースコードの最上位ディレクトリにmodule-info.javaを作成
-  - TODO
 
+## TODO
+- [how to create java runtime image with maven](http://blog.soebes.de/blog/2017/06/06/howto-create-a-java-run-time-image-with-maven/)
+- [A practical guide to Java 9 - compile jar run https://sites.google.com/a/athaydes.com/renato-athaydes/posts/guidetojava9-compilejarrun)
