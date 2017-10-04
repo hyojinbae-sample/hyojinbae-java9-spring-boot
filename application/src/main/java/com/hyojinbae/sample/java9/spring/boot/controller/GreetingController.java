@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
-
     private GreetingService service;
     public GreetingController(GreetingService service) {
         this.service = service;

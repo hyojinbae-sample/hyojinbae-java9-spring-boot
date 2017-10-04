@@ -10,5 +10,4 @@ public class Java9SpringBootApplication {
 		SpringApplication.run(Java9SpringBootApplication.class, args);
 	}
 
-
 }
