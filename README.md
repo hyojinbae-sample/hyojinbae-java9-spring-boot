@@ -34,6 +34,12 @@ java9のモジュール機能を利用し、モジュール化してみる。
 ## applicationプロジェクト
 - [module-info.java](https://github.com/hyojinbae-sample/hyojinbae-java9-spring-boot/blob/use-module/application/src/main/java/module-info.java)作成
 
+## Q and A
+### Springのコードベースはjava8 source code levelになっているが、module-info.javaのrequiresに指定できる理由は？
+https://github.com/spring-projects/spring-framework/wiki/Migrating-to-Spring-Framework-5.x
+
+module pathに通すことで、automatic moduleとして利用できる。
+
 ## まとめ
 - java9のモジュール機能を利用しない場合、今まで通りに作ればOK。
 - java9のモジュールにする場合は、
