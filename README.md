@@ -246,4 +246,4 @@ $JAVA_HOME/jmods --add-modules java9.spring.boot.application --output ./output
 
 ## TODO
 - [how to create java runtime image with maven](http://blog.soebes.de/blog/2017/06/06/howto-create-a-java-run-time-image-with-maven/)
-- [A practical guide to Java 9 - compile jar run https://sites.google.com/a/athaydes.com/renato-athaydes/posts/guidetojava9-compilejarrun)
+- [A practical guide to Java 9 - compile jar run] https://sites.google.com/a/athaydes.com/renato-athaydes/posts/guidetojava9-compilejarrun)
