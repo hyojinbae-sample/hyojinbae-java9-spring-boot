@@ -204,7 +204,8 @@ module pathに通すことで、automatic moduleとして利用できる。
 
 - まず、mavenの clean packageを実行
   - しようとしたが、うまくjarが作れえず、手作業でそれぞれのjarを作成
-  - ```
+  -
+```
   
 cd api/target/classes
 mkdir jar
@@ -221,7 +222,8 @@ mkdir jar
 jar -c -f jar/application.jar .
 cd ../../..
 ```
-- terminalから下記のコマンドを実行
+
+terminalから下記のコマンドを実行
 
 ```
 export JAVA_HOME=`/usr/libexec/java_home -v 9` 
