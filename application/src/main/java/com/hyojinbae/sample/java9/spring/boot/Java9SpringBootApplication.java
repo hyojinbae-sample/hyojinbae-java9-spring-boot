@@ -1,13 +1,20 @@
 package com.hyojinbae.sample.java9.spring.boot;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.hyojinbae.sample.java9.spring.boot.api.GreetingService;
+import java.util.ServiceLoader;
 
-@SpringBootApplication
 public class Java9SpringBootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Java9SpringBootApplication.class, args);
-	}
+		ServiceLoader
+				.load(GreetingService.class)
+				.stream()
+                .map(ServiceLoader.Provider::get)
+				.map(GreetingService::greet)
+                .forEach(System.out::println)
+                ;
+
+        System.out.println("The end of Application");
+    }
 
 }
