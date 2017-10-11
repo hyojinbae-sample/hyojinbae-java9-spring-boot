@@ -14,6 +14,7 @@
 
 ## runtime-image
 runtime image作成用プロジェクト(jlinkプラグイン利用)
+※後述
 
 ## プロジェクトの依存関係
 ```
@@ -31,24 +32,73 @@ java9.spring.boot.application -> java9.spring.boot.api
 
 ## 実行(従来)
 ```
+clean package
+```
+
+```
 java -p target/libs -m java9.spring.boot.application/com.hyojinbae.sample.java9.spring.boot.Java9SpringBootApplication
 ```
 
-## 実行(jlink)
-
-### maven goal実行
+## runtime image作成(jlink)
 ```
 clean package
 ```
 
-### アプリケーション実行
+```
+export JAVA_HOME=`/usr/libexec/java_home -v 9`
+
+$JAVA_HOME/bin/jlink -p $JAVA_HOME/jmods:runtime-image/target/libs --add-modules java9.spring.boot.application \
+  --output dist
+  
+```
+
+### 実行
+```
+dist/bin/java com.hyojinbae.sample.java9.spring.boot.Java9SpringBootApplication
+```
+
+### runtime image作成(特定OS向け)
+jlinkはJDKが各OSごとに分かれているのと同様に、特定のOSまたはarchtectureでしか実行できない。
+
+#### MacOSでlinux 64bit用のイメージを作成
+##### linux 64bit用のJDKダウンロードして解凍
+```
+wget --no-check-certificate --no-cookies \
+         --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+curl -v -j -k -L -H \
+         "Cookie: oraclelicense=accept-securebackup-cookie" \
+         http://download.oracle.com/otn-pub/java/jdk/9+181/jdk-9_linux-x64_bin.tar.gz \
+         > jdk-9_linux-x64_bin.tar.gz
+#         http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.rpm
+```
+
+```
+mkdir jdk9-linux64
+tar -zxvf jdk-9_linux-x64_bin.tar.gz -C ./jdk9-linux64
+
+$JAVA_HOME/bin/jlink -p ./jdk9-linux64/jdk-9/jmods:runtime-image/target/libs --add-modules java9.spring.boot.application \
+  --output dist
+  
+```
+
+※ こノーイメージは、macでは実行できない
+
+```
+dist/bin/java com.hyojinbae.sample.java9.spring.boot.Java9SpringBootApplication
+```
+
+####
 terminalにて下記を実行する。
 
 ```
-runtime-image/target/maven-jlink/bin/java com.hyojinbae.sample.java9.spring.boot.Java9SpringBootApplication
+docker run -it --rm -v $(pwd)/dist:/dist centos /bin/bash
 ```
 
+```
+dist/bin/java com.hyojinbae.sample.java9.spring.boot.Java9SpringBootApplication
+```
 
+### 
 ## まとめ
 - 意図しなかったクラスを参照(import)するのを防げる
 - IDE(intellij)機能を使えば簡単にできる
